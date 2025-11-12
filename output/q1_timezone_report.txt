@@ -1,0 +1,10 @@
+ Timezone Operations Report
+TODO: Document your timezone operations:
+ The original data was naive (no timezone info).
+ I localized the data to UTC using tz_localize('UTC').
+ I converted the data to 'US/Eastern' timezone.
+    Some issues with DST transitions were avoided by using UTC as the base timezone, which has no daylight saving time. 
+    This prevents ambiguity during the transition periods when clocks are set forward or backward.
+One example is the datetime '2023-03-12 10:00:00' in UTC, which converts to '2023-03-12 05:00:00' in US/Eastern.
+UTC is recommended because it is consistent year-round without DST changes, 
+reducing complexity in time calculations and comparisons across different regions.
