@@ -1,0 +1,68 @@
+TODO: Document your missing data handling:
+- Missing value summary: There were 323 missing values found, about 96.42 percent of the data was missing.
+This was among multiple columns, most missing values were found in heart rate, blood pressure, and weight.
+- Missing data patterns: We used multiple imputation methods including forward fill, backward fill,
+     interpolation, linear interpolation, time-base interpolation and rolling mean imputation. My preference was towards the time-base interpolation based on the percentage of the data missing,
+     and my understanding of interpolation using time as a third variable to help with imputation of missing values. Another method I was leaning towards using was a more basic forward fill, 
+     however, because there is so much data missing, I am hesitant to use this method as it may cause overestimation of values that are not actually reflective of the true data.
+- Rationale: I believe this to be a more reliable way to impute data.
+     Using the wrong imputation method can lead to negative outcomes when more data is missing such as extreme skews or incorrect representations of the overall trends.
+- Pros and Cons: Some pros with time-base interpolation is that the data will not stray too far from the original data points and we can use this in a larger dataset as a way 
+to keep consistency with trends that may be observed. However, the same risks apply as with any form of imputation where if you overfit a dataset to a trend you observe, i.e. you 
+impute too many datasets, you can lead to something disastrous like creating your own data based off of minimal data points that are collected. So, in general, it is always safer to 
+be more conservative with imputation methods no matter how precise they may be. You can also use more than one method to keep variation and avoid some form of overfitting or over-imputation 
+if you will.
+- Example:
+date
+2023-01-31    98.777000
+2023-02-01          NaN
+2023-02-02          NaN
+2023-02-03          NaN
+2023-02-04          NaN
+                ...    
+2023-12-27          NaN
+2023-12-28          NaN
+2023-12-29          NaN
+2023-12-30          NaN
+2023-12-31    98.538865
+Freq: D, Name: temperature, Length: 335, dtype: float64
+date
+2023-01-31    98.777000
+2023-02-01    98.785011
+2023-02-02    98.793021
+2023-02-03    98.801031
+2023-02-04    98.809041
+...
+2023-12-29    98.523725
+2023-12-30    98.531295
+2023-12-31    98.538865
+
+
+
+Missing patterns:
+Missing by month:
+date
+1      0
+2     27
+3     30
+4     29
+5     30
+6     29
+7     30
+8     30
+9     29
+10    30
+11    29
+12    30
+Name: temperature, dtype: int64
+
+Missing by day of week:
+date
+0    46
+1    45
+2    47
+3    46
+4    46
+5    47
+6    46
+Name: temperature, dtype: int64
